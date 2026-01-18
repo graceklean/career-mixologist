@@ -240,7 +240,20 @@ Generate ONLY a JSON response (no markdown, no code blocks) with this exact stru
       const cocktailData = JSON.parse(cleanedResponse);
       setCocktail(cocktailData);
     } catch (err) {
-      setError(err.message || 'Something went wrong. Please try again.');
+      // Better error handling
+      let errorMessage = 'Something went wrong. Please try again.';
+      
+      if (err.message.includes('429') || err.message.includes('quota')) {
+        errorMessage = 'API rate limit reached. Please wait a moment and try again.';
+      } else if (err.message.includes('API key')) {
+        errorMessage = 'API key issue. Please check your configuration.';
+      } else if (err.message.includes('JSON') || err.message.includes('parse')) {
+        errorMessage = 'Generation error. Please try again with different inputs.';
+      } else if (err.message.includes('network') || err.message.includes('fetch')) {
+        errorMessage = 'Network error. Please check your connection and try again.';
+      }
+      
+      setError(errorMessage);
       console.error('Error:', err);
     } finally {
       setLoading(false);
@@ -312,8 +325,10 @@ Generate ONLY a JSON response (no markdown, no code blocks) with this exact stru
               value={formData.baseSpirit}
               onChange={handleInputChange}
               required
+              minLength={2}
+              maxLength={50}
             />
-            <div className="helper-text">What you studied</div>
+            <div className="helper-text">What you studied (2-50 characters)</div>
           </div>
 
           <div className="form-group">
@@ -326,8 +341,10 @@ Generate ONLY a JSON response (no markdown, no code blocks) with this exact stru
               value={formData.garnish}
               onChange={handleInputChange}
               required
+              minLength={2}
+              maxLength={50}
             />
-            <div className="helper-text">A weird job along the way</div>
+            <div className="helper-text">A weird job along the way (2-50 characters)</div>
           </div>
 
           <div className="form-group">
@@ -340,8 +357,10 @@ Generate ONLY a JSON response (no markdown, no code blocks) with this exact stru
               value={formData.mixer}
               onChange={handleInputChange}
               required
+              minLength={2}
+              maxLength={50}
             />
-            <div className="helper-text">What you do now</div>
+            <div className="helper-text">What you do now (2-50 characters)</div>
           </div>
 
           <div className="form-group">
@@ -355,8 +374,9 @@ Generate ONLY a JSON response (no markdown, no code blocks) with this exact stru
               placeholder="e.g., Public speaking"
               value={formData.secretIngredient}
               onChange={handleInputChange}
+              maxLength={50}
             />
-            <div className="helper-text">An unexpected skill that connects it all</div>
+            <div className="helper-text">An unexpected skill that connects it all (max 50 characters)</div>
           </div>
 
           <div className="form-group">
