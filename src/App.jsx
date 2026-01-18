@@ -182,8 +182,9 @@ function App() {
     setLoading(true);
     setError('');
 
-    const prompt = `You are a creative career cocktail mixologist. Generate a clever, humorous career cocktail based on these inputs:
+    const prompt = `You are a creative career cocktail mixologist. Create a METAPHORICAL cocktail recipe where the career journey IS the cocktail ingredients.
 
+CAREER INPUTS (these ARE the ingredients):
 Base Spirit (what they studied): ${formData.baseSpirit}
 Garnish (weird job along the way): ${formData.garnish}
 Mixer (current job): ${formData.mixer}
@@ -191,18 +192,22 @@ ${formData.secretIngredient ? `Secret Ingredient (unexpected skill): ${formData.
 
 Style: ${formData.style === 'stirred' ? 'STIRRED - Honest, reflective, humble tone. Acknowledges the non-linear path without diminishing it. Grounded, real, relatable energy. Example: "The scenic route taught me things the highway never would"' : 'SHAKEN - Bold, confident, empowering tone. Owns the unconventional path as intentional. Declarative, powerful energy. Example: "This combination is exactly why it works"'}
 
-${formData.secretIngredient ? 'The tasting notes should highlight how the secret ingredient unexpectedly connects everything.' : 'The tasting notes should focus on the contrast between the career points.'}
+CRITICAL RULES:
+1. The recipe MUST reference the actual career inputs (${formData.baseSpirit}, ${formData.garnish}, ${formData.mixer}${formData.secretIngredient ? `, ${formData.secretIngredient}` : ''}) - NOT real cocktail ingredients like gin, vodka, lemon, etc.
+2. Use bartending verbs metaphorically: "Muddle 4 years of ${formData.baseSpirit}", "Shake in ${formData.garnish} experience", "Strain through ${formData.mixer} challenges"
+3. The cocktail name MUST include a classic cocktail type (Collins, Martini, Manhattan, Daiquiri, Spritz, Old Fashioned, Negroni, Mojito, Hurricane, Mai Tai)
+4. Recipe length: 50-60 words with multiple bartending steps
+5. Tasting notes: 10-15 words max, punchy tagline that reflects the ${formData.style} tone
+${formData.secretIngredient ? `6. The tasting notes MUST mention how "${formData.secretIngredient}" unexpectedly connects everything` : '6. The tasting notes should focus on the contrast between the career points'}
 
-IMPORTANT INSTRUCTIONS:
-- The cocktail name MUST include a classic cocktail type (e.g., "Spritz", "Old Fashioned", "Martini", "Collins", "Negroni", "Manhattan", "Daiquiri", "Mojito", "Hurricane", "Mai Tai") so the glass can be matched
-- The recipe should be detailed (50-60 words) with multiple bartending steps using verbs like: muddle, shake, stir, strain, top with, express, garnish, serve
-- The tasting notes should be brief and punchy (10-15 words max) - like a tagline
+EXAMPLE RECIPE FORMAT (use career ingredients, not these):
+"Gently stir 2 oz of Biology degree with 6 months of restaurant hosting. Add a generous pour of Ecommerce management, strain through technical complexity. Express the coding skills over the top, garnish with continuous learning."
 
-Generate ONLY a JSON response (no markdown, no code blocks) with this exact structure:
+Generate ONLY a JSON response (no markdown, no code blocks):
 {
-  "name": "A creative cocktail name that includes a classic cocktail type (6-10 words)",
-  "recipe": "Detailed recipe with multiple steps using bartending verbs (50-60 words)",
-  "tastingNotes": "Brief, punchy tagline (10-15 words max). Match the ${formData.style} tone exactly."
+  "name": "Creative name with classic cocktail type (6-10 words)",
+  "recipe": "Recipe using ONLY the career inputs as ingredients (50-60 words)",
+  "tastingNotes": "Brief, punchy tagline (10-15 words max)"
 }`;
 
     try {
