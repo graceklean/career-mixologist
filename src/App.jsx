@@ -97,22 +97,26 @@ const GlassSVG = ({ type, idPrefix = 'card' }) => {
     ),
     
     coupe: (
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{stopColor:'#ed1260', stopOpacity:1}} />
-            <stop offset="100%" style={{stopColor:'#f15a51', stopOpacity:1}} />
-          </linearGradient>
-        </defs>
-        <rect x="48" y="65" width="4" height="20" fill="#ab987a" rx="2"/>
-        <ellipse cx="50" cy="87" rx="12" ry="3" fill="#ab987a"/>
-        <ellipse cx="50" cy="60" rx="26" ry="35" fill={`url(#${gradientId})`} opacity="0.9"/>
-        <ellipse cx="50" cy="25" rx="24" ry="3" stroke={strokeColor} strokeWidth="2" fill="none"/>
-        <circle cx="38" cy="40" r="2" fill={sparkleColor} opacity="0.4"/>
-        <circle cx="60" cy="48" r="1.5" fill={sparkleColor} opacity="0.35"/>
-        <path d="M 26 25 Q 50 28 74 25" stroke={strokeColor} strokeWidth="1.5" fill="none" opacity="0.5"/>
-      </svg>
-    ),
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style={{stopColor:'#ed1260', stopOpacity:1}} />
+        <stop offset="100%" style={{stopColor:'#f15a51', stopOpacity:1}} />
+      </linearGradient>
+    </defs>
+    {/* Stem */}
+    <rect x="48" y="60" width="4" height="25" fill="#ab987a" rx="2"/>
+    {/* Base */}
+    <ellipse cx="50" cy="87" rx="12" ry="3" fill="#ab987a"/>
+    {/* Bowl - rounded bottom */}
+    <path d="M 24 30 Q 24 60 50 60 Q 76 60 76 30 Z" fill={`url(#${gradientId})`} opacity="0.9"/>
+    {/* Rim */}
+    <ellipse cx="50" cy="30" rx="26" ry="4" fill="none" stroke={strokeColor} strokeWidth="2"/>
+    {/* Sparkles */}
+    <circle cx="38" cy="45" r="2" fill={sparkleColor} opacity="0.4"/>
+    <circle cx="60" cy="50" r="1.5" fill={sparkleColor} opacity="0.35"/>
+  </svg>
+),
     
     hurricane: (
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
